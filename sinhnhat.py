@@ -4,49 +4,26 @@ Created on Thu Aug 15 19:43:13 2024
 
 @author: TuTrinh
 """
-y=float(input("Nhap nam sinh: "))
-if y>0 and y<2005:
-    if (y%4==0 and y%100!=0) or (y%400==0):
-        m=float(input("Nhap thang sinh: "))
-        if m>=1 and m<=12:
-            if m==2:
-                d=float(input("Nhap ngay sinh: "))
-                if d>=1 and d<=29:
-                    print("Hop le")
-                else:
-                    print("Khong hop le")
-            if m==1 and m==3 and m==5 and m==7 and m==8 and m==10 and m==12:
-                d=float(input("Nhap ngay sinh: "))
-                if d>=1 and d<=31:
-                    print("Hop le")
-                else:
-                    print("Khong hop le")
-            if m==4 and m==6 and m==9 and m==11:
-                d=float(input("Nhap ngay sinh: "))
-                if d>=1 and d<=30:
-                    print("Hop le")
-                else:
-                    print("Khong hop le")
-    else:
-        m=float(input("Nhap thang sinh: "))
-        if m==2:
-            d=float(input("Nhap ngay sinh: "))
-            if d>=1 and d<=28:
-                print("Hop le")
-            else:
-                print("Khong hop le")
-        if m==1 and m==3 and m==5 and m==7 and m==8 and m==10 and m==12:
-            d=float(input("Nhap ngay sinh: "))
-            if d>=1 and d<=31:
-                print("Hop le")
-            else:
-                print("Khong hop le")
-        if m==4 and m==6 and m==9 and m==11:
-            d=float(input("Nhap ngay sinh: "))
-            if d>=1 and d<=30:
-                print("Hop le")
-            else:
-                print("Khong hop le")
+
+date_str = input("Nhập vào ngày tháng năm theo định dạng dd/mm/yyyy hoặc dd-mm-yyyy: ")
+
+if '/' in date_str:
+    day, month, year = map(int, date_str.split('/'))
+elif '-' in date_str:
+    day, month, year = map(int, date_str.split('-'))
 else:
-    print("Khong hop le")
-        
+    print("Định dạng ngày tháng không hợp lệ.")
+
+if 1 <= month <= 12 and day > 0 and (
+    (month in [1, 3, 5, 7, 8, 10, 12] and day <= 31) or 
+    (month in [4, 6, 9, 11] and day <= 30) or 
+    (month == 2 and (
+        (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0) and day <= 29) or 
+        (day <= 28)
+    )):
+    if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
+        print(f"Ngày {day}/{month}/{year} là ngày hợp lệ và năm {year} là năm nhuận.")
+    else:
+        print(f"Ngày {day}/{month}/{year} là ngày hợp lệ nhưng năm {year} không phải là năm nhuận.")
+else:
+    print("Ngày tháng năm không hợp lệ.")
